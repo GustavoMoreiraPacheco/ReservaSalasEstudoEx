@@ -30,9 +30,9 @@ public class proxy {
         }
     }
 
-    /**
-     * Verifica se um usuário possui acesso
-     */
+    
+     //Verifica se um usuário possui acesso
+    
     private boolean podeAcessarSala(Usuario usuario) {
         if (usuario == null) {
             throw new SecurityException("[PROXY] Usuário não pode ser nulo para acessar salas");
@@ -45,18 +45,14 @@ public class proxy {
         return temAcesso;
     }
 
-    // ========== CACHE DE CONSULTAS ==========
+   
+     //Verifica se o cache está desatualizado
     
-    /**
-     * Verifica se o cache está desatualizado
-     */
     private boolean cacheDesatualizado() {
         return ultimaAtualizacaoCache.plusMinutes(TEMPO_CACHE_MINUTOS).isBefore(LocalDateTime.now());
     }
 
-    /**
-     * Limpa o cache quando desatualizado
-     */
+    /**Limpa o cache quando desatualizado*/
     private void limparCacheSeNecessario() {
         if (cacheDesatualizado()) {
             cacheSalas.clear();
@@ -65,11 +61,9 @@ public class proxy {
         }
     }
 
-    // ========== MÉTODOS DELEGADOS COM PROTEÇÃO ==========
+  
 
-    /**
-     * Obtém uma sala pelo ID com cache, controle de acesso e tratamento de exceções
-     */
+    /**Obtém uma sala pelo ID com cache, controle de acesso e tratamento de exceções*/
     public Sala getidSala(String id, Usuario usuario) {
         try {
             // Validação de entrada
@@ -111,9 +105,7 @@ public class proxy {
         }
     }
 
-    /**
-     * Lista salas disponíveis com cache, controle de acesso e tratamento de exceções
-     */
+    /*Lista salas disponíveis com cache, controle de acesso e tratamento de exceções*/
     public List<Sala> read(Usuario usuario) {
         try {
             // Controle de acesso
@@ -149,9 +141,7 @@ public class proxy {
         }
     }
 
-    /**
-     * Limpa o cache manualmente
-     */
+    /*Limpa o cache manualmente*/
     public void limparCache() {
         cacheSalas.clear();
         ultimaAtualizacaoCache = LocalDateTime.now();
