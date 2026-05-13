@@ -20,11 +20,13 @@ import br.edu.reserva.service.ServicoDeReserva;
 import br.edu.reserva.singleton.RepositorioReservas;
 import br.edu.reserva.strategy.PoliticaPrimeiroChegarPrimeiroPago;
 import br.edu.reserva.strategy.PoliticaPrioridadeDocente;
+import br.edu.reserva.proxy.proxy;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
+
 
 public class Main {
 
@@ -182,4 +184,17 @@ public class Main {
             return null;
         }
     }
+
+    //implementação do Proxy para controle de acesso e cache de salas na main
+    private static proxy proxySala = new proxy();
+    proxySala.limparCacheSeNecessario(); // Limpa o cache ao iniciar o sistema para garantir dados atualizados
+    proxySala.getidSala("S01", e1); // Exemplo de acesso a sala via proxy, com controle de acesso e cache
+    proxySala.getidSala("S01", e1); // Acesso repetido para demonstrar cache
+    proxySala.getidSala("S03", e2); // Acesso a sala diferente para demonstrar cache e controle de acesso
+    proxySala.getidSala("S03", e2);
+     // Acesso repetido a sala diferente para demonstrar cache
+
+    proxySala.getidSala("S05", prof); // Acesso a sala de laboratório para professor, deve ser permitido
+    proxySala.getidSala("S05", e1); // Acesso a sala de
+
 }
