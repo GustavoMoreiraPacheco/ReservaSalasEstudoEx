@@ -156,9 +156,28 @@ classDiagram
         +listarSalas() List
         +listarSalasDisponiveis(LocalDateTime,LocalDateTime) List
         +salvarReserva(Reserva)
-        +buscarReservaPorId(String) Optional
+        +buscarSalaPorId(String) Optional~Sala~
         +listarTodas() List
     }
+
+    %% PROXY
+    class ProxyReservas {
+        -RepositorioReservas repositorio
+        -Map~String, Sala~ cacheSalas
+        -LocalDateTime ultimaAtualizacaoCache
+        -long TEMPO_CACHE_MINUTOS
+        -Set~Usuario~ usuariosAutorizados
+        +autorizarUsuario(Usuario)
+        -podeAcessarSala(Usuario) boolean
+        -cacheDesatualizado() boolean
+        -limparCacheSeNecessario()
+        +getidSala(String, Usuario) Sala
+        +read(Usuario) List~Sala~
+        +limparCache()
+    }
+    ProxyReservas --> RepositorioReservas : delega/acessa
+    ProxyReservas --> Usuario : valida acesso
+    ProxyReservas --> Sala : armazena em cache
 
     %% DECORATOR
     class ServicoAdicional {
