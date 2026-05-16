@@ -4,6 +4,6 @@ Cache, para melhorar a performance ao armazenar os resultados de buscas anterior
 
 Controle de acesso, verificando se o usuário possui acesso para poder acessar ou listar salas através de podeAcessarSala();
 
-Impede buscas inválidas sem precisar realizar uma consulta;
+Impede buscas inválidas sem precisar realizar uma consulta, novamente melhorando o desempenho;
 
-E logging, exibindo informações sobre ações como autorização e errod no console.
+E logging, exibindo informações sobre ações como autorização e erros no console, facilitando a compreensão por parte do usuário e a manutenção.
